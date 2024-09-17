@@ -19,10 +19,7 @@ import paymentRoutes from './routes/payment.route.js';
 const app = express();
 
 // Middleware
-app.use(cors({
-  origin: process.env.CLIENT_URL, // Allow requests from your React app URL
-  credentials: true,
-}));
+app.use(cors());
 // Enable CORS for all routes
 app.use(helmet()); // Secure HTTP headers
 app.use(bodyParser.json({ limit: '20mb' })); // Parse incoming JSON requests
