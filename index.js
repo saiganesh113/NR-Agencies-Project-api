@@ -20,7 +20,6 @@ const app = express();
 
 // Middleware
 app.use(cors());
-// Enable CORS for all routes
 app.use(helmet()); // Secure HTTP headers
 app.use(bodyParser.json({ limit: '20mb' })); // Parse incoming JSON requests
 app.use(bodyParser.urlencoded({ limit: '20mb', extended: true })); // Parse URL-encoded data
@@ -45,25 +44,25 @@ app.get('/api/health', (req, res) => {
   res.status(200).json({ status: 'Healthy' });
 });
 
+app.get('/',(req,res) =>{
+  res.json({message:"server is running sucessfully"})
+})
 // Global error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({ message: 'Internal server error' });
 });
 
-app.get('/',(req,res) =>{
-  res.json({message:"server is running sucessfully"})
-})
-
 // Database Connection
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => {
-    console.log('Connected to MongoDB successfully');
-    app.listen(process.env.PORT || 5000, () => {
-      console.log(`Server running on port ${process.env.PORT || 5000}`);
-    });
-  })
-  .catch((err) => {
-    console.error('Failed to connect to MongoDB:', err.message);
-    process.exit(1);
+mongoose.connect(process.env.MONGO_URI
+)
+.then(() => {
+  console.log('Connected to MongoDB successfully');
+  app.listen(process.env.PORT || 5000, () => {
+    console.log(`Server running on port ${process.env.PORT || 5000}`);
   });
+})
+.catch((err) => {
+  console.error('Failed to connect to MongoDB:', err);
+  process.exit(1); // Exit process if the connection fails
+});
