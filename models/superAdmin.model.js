@@ -2,6 +2,8 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 
+
+
 const SuperAdminSchema = new mongoose.Schema({
   email: {
     type: String,
