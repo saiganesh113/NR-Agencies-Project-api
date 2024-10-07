@@ -1,6 +1,6 @@
 // models/superAdmin.model.js
 import mongoose from 'mongoose';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 
 
 
