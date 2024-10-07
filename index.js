@@ -15,6 +15,15 @@ import repairRoutes from './routes/repair.route.js';
 import installationRoutes from './routes/installation.route.js';
 import cartRoutes from './routes/cart.route.js';
 import paymentRoutes from './routes/payment.route.js';
+import washingMachineRepairRoutes from './routes/washingMachineRepair.route.js';
+import washingMachineInstallationRoutes from './routes/washingMachineInstallation.route.js';
+import washingMachineUninstallationRoutes from './routes/washingMachineUninstallation.route.js';
+import singleDoor from './routes/singledoor.route.js';
+import doubleDoor from './routes/doubledoor.route.js';
+import sideDoor from './routes/sidedoor.route.js';
+import SuperAdmin from './routes/superAdmin.route.js';
+import Email from './routes/email.route.js'
+
 
 const app = express();
 
@@ -33,6 +42,14 @@ app.use('/api/repairs', repairRoutes);
 app.use('/api/installations', installationRoutes);
 app.use('/api/carts', cartRoutes);
 app.use('/api/payment', paymentRoutes);
+app.use('/api/wrepairs', washingMachineRepairRoutes);
+app.use('/api/winstallations', washingMachineInstallationRoutes);
+app.use('/api/wuninstallations', washingMachineUninstallationRoutes);
+app.use('/api/singledoor', singleDoor);
+app.use('/api/doubledoor', doubleDoor);
+app.use('/api/sidedoor', sideDoor);
+app.use('/api/superadmin', SuperAdmin);
+app.use('/api/email', Email);
 
 // Notifications route (for example)
 app.get('/api/notifications', (req, res) => {
@@ -44,9 +61,10 @@ app.get('/api/health', (req, res) => {
   res.status(200).json({ status: 'Healthy' });
 });
 
-app.get('/',(req,res) =>{
-  res.json({message:"server is running sucessfully"})
-})
+app.get('/', (req, res) => {
+  res.status(200).json([{ message: 'Server is running'}]);
+});
+
 // Global error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
@@ -54,8 +72,7 @@ app.use((err, req, res, next) => {
 });
 
 // Database Connection
-mongoose.connect(process.env.MONGO_URI
-)
+mongoose.connect(process.env.MONGO_URI)
 .then(() => {
   console.log('Connected to MongoDB successfully');
   app.listen(process.env.PORT || 5000, () => {
