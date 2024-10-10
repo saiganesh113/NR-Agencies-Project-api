@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import bcrypt from 'bcryptjs'; // Ensure bcrypt is imported
+import bcrypt from 'bcrypt'; // Ensure bcrypt is imported
 
 const userSchema = new mongoose.Schema({
   userid: { type: String, required: true, unique: true },

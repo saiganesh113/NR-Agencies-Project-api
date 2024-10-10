@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import bcrypt from 'bcryptjs'; // Make sure to install bcrypt
+import bcrypt from 'bcrypt'; // Make sure to install bcrypt
 
 const technicianSchema = new mongoose.Schema({
   techid: { type: String, required: true, unique: true },
